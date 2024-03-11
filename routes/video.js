@@ -24,23 +24,30 @@ router.route("/:id").get((req, res) => {
 
 router.route("/").post((req, res) => {
     const videos = JSON.parse(fs.readFileSync("./data/videos.json"));
+
+    const {
+        title,
+        image,
+        description
+    } = req.body;
+
     const newVideo = {
-        id: uuidv4(),
-        title: req.body.title,
-        channel: "Aiden Thompson",
-        image: "image0.jpg",
-        description: req.body.description,
-        views: "980,544",
-        likes: "22,479",
-        duration: "4:01",
-        video: "https://unit-3-project-api-0a5620414506.herokuapp.com/stream",
+        id: vvidv4(),
+        title,
+        description,
+        image,
+        channel: "XXX",
+        views: 0,
+        likes: 0,
+        duration: "00:00",
+        video:"",
         timestamp: Date.now(),
-        comments: [],
+        comments:[]
     };
 
     videos.push(newVideo);
 
-    fs.writeFileSync("./data/videos.json", JSON.stringify(videos));
+    fs.writeFileSync("./data/videos.json", JSON.stringify(videos,null,2));
     res.send("Video Uploaded Successful!");
 });
 
